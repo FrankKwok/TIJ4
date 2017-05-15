@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.strings;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +22,8 @@ import java.util.regex.Pattern;
  * @author Frank Kwok on 2017/5/9.
  */
 public class JGrep {
+    static int index;
+
     public static void main(String[] args) throws Exception {
         if (args.length < 3) {
             System.out.println("Usage: java JGrep file regex");
@@ -28,13 +31,27 @@ public class JGrep {
         }
         Pattern p = Pattern.compile(args[1], Integer.parseInt(args[2]));
         // Iterate through the lines of the input file:
-        int index = 0;
         Matcher m = p.matcher("");
-        for (String line : new TextFile(args[0])) {
-            m.reset(line);
-            while (m.find())
-                System.out.println(index++ + ": " +
-                        m.group() + ": " + m.start());
+
+        acceptDir(args[0], m);
+    }
+
+    static void acceptDir(String filename, Matcher matcher) {
+        File file = new File(filename).getAbsoluteFile();
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    acceptDir(f.getPath(), matcher);
+                }
+            }
+        } else {
+            for (String line : new TextFile(filename)) {
+                matcher.reset(line);
+                while (matcher.find()) {
+                    System.out.println(index++ + ":" + matcher.group() + ":" + matcher.start());
+                }
+            }
         }
     }
 }
