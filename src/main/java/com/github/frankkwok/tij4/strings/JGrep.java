@@ -1,6 +1,6 @@
 package com.github.frankkwok.tij4.strings;
 
-import com.github.frankkwok.tij4.holding.TextFile;
+import com.github.frankkwok.tij4.util.TextFile;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
