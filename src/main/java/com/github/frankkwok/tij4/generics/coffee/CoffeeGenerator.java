@@ -1,6 +1,6 @@
 package com.github.frankkwok.tij4.generics.coffee;
 
-import com.github.frankkwok.tij4.typoinfo.factory.Factory;
+import com.github.frankkwok.tij4.typeinfo.factory.Factory;
 import com.github.frankkwok.tij4.util.Generator;
 
 import java.util.ArrayList;
