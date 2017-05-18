@@ -14,4 +14,8 @@ public class Pet extends Individual {
     public Pet(String name) {
         super(name);
     }
+
+    public void speak() {
+        System.out.println(this + ".speak");
+    }
 }
