@@ -114,7 +114,7 @@ public class SlowMap<K, V> implements Map<K, V> {
     }
 }
 
-class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>> {
+class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>>, Comparable<MapEntry<K, V>> {
     private K key;
     private V value;
 
@@ -125,7 +125,7 @@ class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>> {
         this.value = value;
     }
 
-    public MapEntry(K key, V value, MapEntry<K, V> previous) {
+    MapEntry(K key, V value, MapEntry<K, V> previous) {
         this.key = key;
         this.value = value;
         this.previous = previous;
@@ -177,7 +177,7 @@ class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>> {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(key) ^ Objects.hashCode(value);
+        return Objects.hashCode(key);
     }
 
     @Override
@@ -189,7 +189,7 @@ class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>> {
             return false;
         }
         MapEntry other = (MapEntry) otherObject;
-        return Objects.equals(key, other.key) && Objects.equals(value, other.value);
+        return Objects.equals(key, other.key);
     }
 
     public String toString() {
@@ -204,5 +204,11 @@ class MapEntry<K, V> implements Map.Entry<K, V>, Iterable<MapEntry<K, V>> {
             current = current.previous;
         }
         return size;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public int compareTo(MapEntry<K, V> other) {
+        return Integer.compare(key.hashCode(), other.key.hashCode());
     }
 }
