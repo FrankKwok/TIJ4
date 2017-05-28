@@ -1,0 +1,8 @@
+Bell|900
+Restart|ThermostatNight|0
+Restart|LightOn|200
+Restart|LightOff|400
+Restart|WaterOn|600
+Restart|WaterOff|800
+Restart|ThermostatDay|1400
+Restart|2000
