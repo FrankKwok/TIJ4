@@ -4,6 +4,8 @@ import com.github.frankkwok.tij4.util.TextFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,7 +43,7 @@ public class JGrep {
                 }
             }
         } else {
-            for (String line : new TextFile(filename)) {
+            for (String line : Files.readAllLines(Paths.get(filename))) {
                 matcher.reset(line);
                 while (matcher.find()) {
                     System.out.println(index++ + ":" + matcher.group() + ":" + matcher.start());
