@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.containers;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -27,7 +28,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
     @SuppressWarnings("unchecked")
     private MapEntry<K, V>[] buckets = new MapEntry[SIZE];
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Exercise 19, 20
         Map<String, Integer> wordCounter = new SimpleHashMap<>();
         for (String s : new TextFile(".gitignore")) {

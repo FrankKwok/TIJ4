@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.containers;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ public class SlowMap<K, V> implements Map<K, V> {
     private List<K> keys = new ArrayList<>();
     private List<V> values = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Map<String, Integer> wordCounter = new SlowMap<>();
         for (String s : new TextFile(".gitignore")) {
             wordCounter.put(s, wordCounter.getOrDefault(s, 0) + 1);

@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.containers;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class AssociativeArray<K, V> {
         pairs = new Object[length][2];
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Exercise 12
         Map<String, String> map = new HashMap<>();
         map.put("sky", "blue");

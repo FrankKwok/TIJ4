@@ -4,6 +4,7 @@ import com.github.frankkwok.tij4.util.TextFile;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -37,7 +38,7 @@ public class DirList {
         private Pattern pattern;
         private int size;
 
-        public SizeFilter(String regex) {
+        SizeFilter(String regex) {
             pattern = Pattern.compile(regex);
             size = 0;
         }
@@ -47,7 +48,11 @@ public class DirList {
             File file = new File(name);
             if (file.isFile() && file.canRead()) {
                 size += file.length();
-                System.out.println(new TextFile(name));
+                try {
+                    System.out.println(new TextFile(name));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return pattern.matcher(name).matches();
         }

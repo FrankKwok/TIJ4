@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.holding;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -17,7 +18,7 @@ import java.util.*;
  * @author Frank Kwok on 2017/5/8.
  */
 public class UniqueWordsTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<String> list = new TextFile(".gitignore", "\\W+");
 
         Map<String, Integer> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -54,16 +55,16 @@ class StringCount implements Comparable<StringCount> {
     private String word;
     private int count;
 
-    public StringCount(String word) {
+    StringCount(String word) {
         this.word = word;
         count = 1;
     }
 
-    public String getWord() {
+    String getWord() {
         return word;
     }
 
-    public void addCount() {
+    void addCount() {
         count++;
     }
 

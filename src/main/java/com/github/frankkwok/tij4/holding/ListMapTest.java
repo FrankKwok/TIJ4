@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.holding;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @author Frank Kwok on 2017/5/8.
  */
 public class ListMapTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<String> list = new TextFile(".gitignore", "\\W+");
 
         Map<String, ArrayList<Integer>> listMap = new HashMap<>();

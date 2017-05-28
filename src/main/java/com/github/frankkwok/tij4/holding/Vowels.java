@@ -2,6 +2,7 @@ package com.github.frankkwok.tij4.holding;
 
 import com.github.frankkwok.tij4.util.TextFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
  * @author Frank Kwok on 2017/5/8.
  */
 public class Vowels {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Map<Character, Integer> vowels = new HashMap<>();
         vowels.put('a', 0);
         vowels.put('e', 0);

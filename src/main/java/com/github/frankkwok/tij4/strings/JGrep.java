@@ -3,6 +3,7 @@ package com.github.frankkwok.tij4.strings;
 import com.github.frankkwok.tij4.util.TextFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
  * @author Frank Kwok on 2017/5/9.
  */
 public class JGrep {
-    static int index;
+    private static int index;
 
     public static void main(String[] args) throws Exception {
         if (args.length < 3) {
@@ -30,7 +31,7 @@ public class JGrep {
         acceptDir(args[0], m);
     }
 
-    static void acceptDir(String filename, Matcher matcher) {
+    private static void acceptDir(String filename, Matcher matcher) throws IOException {
         File file = new File(filename).getAbsoluteFile();
         if (file.isDirectory()) {
             File[] files = file.listFiles();
