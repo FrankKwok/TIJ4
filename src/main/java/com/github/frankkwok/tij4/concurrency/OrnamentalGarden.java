@@ -6,22 +6,25 @@ import java.util.*;
 /**
  * Page 874
  * Exercise 19: Modify OrnamentalGarden.java so that it uses interrupt( ).
+ * <p>
+ * Page 902
+ * Exercise 32: Use a CountDownLatch to solve the problem of correlating the results from the Entrances in
+ * OrnamentalGarden.java. Remove the unnecessary code from the new version of the example.
  *
  * @author Frank Kwok on 2017/5/30.
  */
 public class OrnamentalGarden {
     public static void main(String[] args) throws Exception {
         ExecutorService exec = Executors.newCachedThreadPool();
+        CountDownLatch countDownLatch = new CountDownLatch(5);
         for (int i = 0; i < 5; i++) {
-            exec.execute(new Entrance(i));
+            exec.execute(new Entrance(i, countDownLatch));
         }
         TimeUnit.SECONDS.sleep(2);
         exec.shutdownNow();
         TimeUnit.SECONDS.sleep(2);
         Entrance.cancel();
-        if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS)) {
-            System.out.println("Some tasks were not terminated!");
-        }
+        countDownLatch.await();
         System.out.println("Total: " + Entrance.getTotalCount());
         System.out.println("Sum of Entrances: " + Entrance.sumEntrances());
     }
@@ -46,18 +49,19 @@ class Count {
 
 class Entrance implements Runnable {
     private static Count count = new Count();
-    private static List<Entrance> entrances =
-            new ArrayList<>();
+    private static List<Entrance> entrances = new ArrayList<>();
     private int number = 0;
     private final int id;
+    private CountDownLatch countDownLatch;
     private static volatile boolean canceled = false;
 
     static void cancel() {
         canceled = true;
     }
 
-    Entrance(int id) {
+    Entrance(int id, CountDownLatch countDownLatch) {
         this.id = id;
+        this.countDownLatch = countDownLatch;
         entrances.add(this);
     }
 
@@ -73,6 +77,7 @@ class Entrance implements Runnable {
                 System.out.println("sleep interrupted");
             }
         }
+        countDownLatch.countDown();
         System.out.println("Stopping " + this);
     }
 
